@@ -1,6 +1,6 @@
 package com.company;
 
-public class House {
+public class Houses {
 
     /*
     [>] Les maisons
@@ -15,7 +15,7 @@ public class House {
     private String category;
     private int price;
 
-    public House(String title, String ref, String category, int price) {
+    public Houses(String title, String ref, String category, int price) {
         this.title = title;
         this.ref = ref;
         this.category = category;
