@@ -13,6 +13,7 @@ public class Users {
 
     private String firstName;
     private String lastName;
+    private String patronym;
     private String bank;
     private int loan;
     private int rate;
@@ -23,6 +24,7 @@ public class Users {
         this.bank = bank;
         this.loan = loan;
         this.rate = rate;
+        this.patronym = firstName + " " +lastName;
     }
 
     public void setFirstName(String firstName) {
@@ -45,11 +47,13 @@ public class Users {
         this.rate = rate;
     }
 
-    public String getFirstName() {
-        return firstName;
+    @Override
+    public boolean equals(Object object) {
+        return object.equals(this.patronym);
     }
 
-    public String getLastName() {
-        return lastName;
+    @Override
+    public String toString() {
+        return (this.firstName + " " + this.lastName + " " + this.bank + " " + this.loan + " " + this.rate);
     }
 }
