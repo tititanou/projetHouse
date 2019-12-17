@@ -12,7 +12,7 @@ public class Main {
 
 	    UsersCmd.adduser(usersList);
         UsersCmd.adduser(usersList);
-        UsersCmd.adduser(usersList);
+        UsersCmd.edituser(usersList);
 
         for(int i = 0; i < usersList.size() ; i++) {
             System.out.println(usersList.get(i).toString());
