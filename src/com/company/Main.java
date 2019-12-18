@@ -8,14 +8,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         List<Users> usersList = new ArrayList();
 
-	    UsersCmd.adduser(usersList);
-        UsersCmd.adduser(usersList);
-        UsersCmd.edituser(usersList);
-
-        for(int i = 0; i < usersList.size() ; i++) {
-            System.out.println(usersList.get(i).toString());
-        }
+	    UsersCmd.add(usersList);
+        UsersCmd.add(usersList);
+        UsersCmd.edit(usersList);
+        UsersCmd.list(usersList);
     }
 }
