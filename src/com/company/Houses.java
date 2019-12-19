@@ -14,12 +14,14 @@ public class Houses {
     private String ref;
     private String category;
     private int price;
+    private String houseId;
 
     public Houses(String title, String ref, String category, int price) {
         this.title = title;
         this.ref = ref;
         this.category = category;
         this.price = price;
+        this.houseId = this.title + " " + this.category + " " + this.price;
     }
 
     public void setTitle(String title) {
@@ -40,5 +42,15 @@ public class Houses {
 
     public String getRef() {
         return ref;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return object.equals(this.houseId);
+    }
+
+    @Override
+    public String toString() {
+        return (this.title + " " + this.ref + " " + this.category + " " + this.price);
     }
 }

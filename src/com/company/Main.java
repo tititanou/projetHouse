@@ -10,13 +10,14 @@ public class Main {
     public static void main(String[] args) {
 
         List<Users> usersList = new ArrayList();
+        List<Houses> housesList = new ArrayList();
 
-	    UsersCmd.add(usersList);
-        UsersCmd.add(usersList);
-        UsersCmd.list(usersList);
-        UsersCmd.edit(usersList);
+	    HousesCmd.add(housesList);
+        HousesCmd.add(housesList);
+        HousesCmd.list(housesList);
+        /*UsersCmd.edit(usersList);
         UsersCmd.list(usersList);
         UsersCmd.remove(usersList);
-        UsersCmd.list(usersList);
+        UsersCmd.list(usersList);*/
     }
 }

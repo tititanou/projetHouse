@@ -4,7 +4,6 @@ import java.util.*;
 
 public class UsersCmd {
 
-
     public static Users create() {
         String f;
         String fn;
