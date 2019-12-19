@@ -24,7 +24,7 @@ public class Users {
         this.bank = bank;
         this.loan = loan;
         this.rate = rate;
-        this.patronym = firstName + " " + lastName;
+        this.patronym = this.firstName + " " + this.lastName;
     }
 
     public void setFirstName(String firstName) {

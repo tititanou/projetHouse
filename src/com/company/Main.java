@@ -13,7 +13,10 @@ public class Main {
 
 	    UsersCmd.add(usersList);
         UsersCmd.add(usersList);
+        UsersCmd.list(usersList);
         UsersCmd.edit(usersList);
+        UsersCmd.list(usersList);
+        UsersCmd.remove(usersList);
         UsersCmd.list(usersList);
     }
 }
