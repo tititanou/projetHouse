@@ -51,6 +51,7 @@ public class Houses {
 
     @Override
     public String toString() {
-        return (this.title + " " + this.ref + " " + this.category + " " + this.price);
+        return ("=====================\nTitle= " + this.title + "\nRef= " + this.ref + "\nCategory= " +
+                this.category + "\nPrice= " + this.price + "\n=====================");
     }
 }

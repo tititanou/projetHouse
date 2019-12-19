@@ -54,6 +54,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return (this.firstName + " " + this.lastName + " " + this.bank + " " + this.loan + " " + this.rate);
+        return ("======================\nFirst name= " + this.firstName + "\nLast name= " + this.lastName +
+                "\nBank= " + this.bank + "\nLoan= " + this.loan + "\nRate= " + this.rate + "=========================");
     }
 }

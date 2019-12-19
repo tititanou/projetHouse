@@ -15,9 +15,9 @@ public class Main {
 	    HousesCmd.add(housesList);
         HousesCmd.add(housesList);
         HousesCmd.list(housesList);
-        /*UsersCmd.edit(usersList);
-        UsersCmd.list(usersList);
-        UsersCmd.remove(usersList);
-        UsersCmd.list(usersList);*/
+        HousesCmd.edit(housesList);
+        HousesCmd.list(housesList);
+        HousesCmd.remove(housesList);
+        HousesCmd.list(housesList);
     }
 }

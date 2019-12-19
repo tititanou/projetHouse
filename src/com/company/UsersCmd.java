@@ -245,7 +245,6 @@ public class UsersCmd {
 
     public static void remove(List<Users> usersList) {
 /* - si l'utilisateur est utilisé dans une transaction , alors l'effacement de cet utilisateur ne pourra pas se faire et un message d'erreur sera affiché */
-
         String f;
         String fn;
         String ln;
@@ -290,16 +289,16 @@ public class UsersCmd {
                     }
                 } while (!functionIsOk);
                 if (buyerIsOK) {
-                    System.out.println("Do you want to remove " + buyer.toString() + "?\n Yes/No");
+                    System.out.println("Do you want to remove \n" + buyer.toString() + "?\n Yes/No");
                     Scanner scann = new Scanner(System.in);
                     String input = scann.next();
                     String answer = input.toLowerCase();
                     if (answer.equals("yes")) {
                         usersList.remove(buyer);
-                        System.out.println(buyer.toString() + " has been deleted.");
+                        System.out.println(buyer.toString() + "\nhas been deleted.");
                         removeIsOk = true;
                     } else if (answer.equals("no")) {
-                        System.out.println(buyer.toString() + "hasn't been deleted.");
+                        System.out.println(buyer.toString() + "\nhasn't been deleted.");
                         removeIsOk = true;
                     } else {
                         System.out.println("Answer incorrect.\nRemove failed.\nPlease try again.");
