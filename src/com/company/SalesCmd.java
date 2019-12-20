@@ -1,8 +1,5 @@
 package com.company;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -96,9 +93,6 @@ public class SalesCmd {
                         System.out.println("You cannot enter null value. Please try again.");
                     }
                     if (saleIsOk) {
-                        /*RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 1, 1));
-                        SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yy");
-                        String saleAgreement = formater.format(date);*/
                         Random rand = new Random();
                         int day = rand.nextInt(29 - 1 + 1) + 1;
                         int month = rand.nextInt(12 - 1 + 1) + 1;
