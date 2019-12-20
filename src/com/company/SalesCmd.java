@@ -25,82 +25,85 @@ public class SalesCmd {
             try {
                 System.out.println("createsale/firstname/lastname/ref");
                 String scan = sc.nextLine();
-                String[] info = scan.split("/");
-                f = info[0];
-                fn = info[1];
-                ln = info[2];
-                ref = info[3];
-                if (!f.equals("") && !fn.equals("") && !ln.equals("") && !ref.equals("")) {
-                    String function = f.toLowerCase();
-                    if (function.equals("createsale")) {
-                        patro = fn + " " + ln;
-                        for (int i = 0; i < usersList.size(); i++) {
-                            Users b = usersList.get(i);
-                            if (b.equals(patro)) {
-                                buyer = b;
-                            }
-                        }
-                        if (buyer != null) {
-                            for (int j = 0; j < housesList.size(); j++) {
-                                Houses h = housesList.get(j);
-                                if (h.getRef().equals(ref)) {
-                                    house = h;
+                if(!scan.toLowerCase().equals("back")) {
+                    String[] info = scan.split("/");
+                    f = info[0];
+                    fn = info[1];
+                    ln = info[2];
+                    ref = info[3];
+                    if (!f.equals("") && !fn.equals("") && !ln.equals("") && !ref.equals("")) {
+                        String function = f.toLowerCase();
+                        if (function.equals("createsale")) {
+                            patro = fn + " " + ln;
+                            for (int i = 0; i < usersList.size(); i++) {
+                                Users b = usersList.get(i);
+                                if (b.equals(patro)) {
+                                    buyer = b;
                                 }
                             }
-                            if (house != null) {
-                                if (salesList.size() > 0) {
-                                    for (int k = 0; k < salesList.size(); k++) {
-                                        if (salesList.get(k).getHouse().getRef().equals(house.getRef())) {
-                                            houseIsOk = false;
-                                            System.out.println("This house is already for sale.");
-                                            break;
-                                        } else {
-                                            houseIsOk = true;
-                                        }
+                            if (buyer != null) {
+                                for (int j = 0; j < housesList.size(); j++) {
+                                    Houses h = housesList.get(j);
+                                    if (h.getRef().equals(ref)) {
+                                        house = h;
                                     }
-                                } else {
-                                    houseIsOk = true;
                                 }
-                                if (houseIsOk) {
+                                if (house != null) {
                                     if (salesList.size() > 0) {
-                                        for (int i = 0; i < salesList.size(); i++) {
-                                            if (salesList.get(i).getBuyer().equals(patro)) {
-                                                saleIsOk = false;
-                                                System.out.println("This buyer already has a current transaction.");
+                                        for (int k = 0; k < salesList.size(); k++) {
+                                            if (salesList.get(k).getHouse().getRef().equals(house.getRef())) {
+                                                houseIsOk = false;
+                                                System.out.println("This house is already for sale.");
                                                 break;
-                                            }
-                                            else {
-                                                saleIsOk = true;
+                                            } else {
+                                                houseIsOk = true;
                                             }
                                         }
                                     } else {
-                                        saleIsOk = true;
+                                        houseIsOk = true;
                                     }
+                                    if (houseIsOk) {
+                                        if (salesList.size() > 0) {
+                                            for (int i = 0; i < salesList.size(); i++) {
+                                                if (salesList.get(i).getBuyer().equals(patro)) {
+                                                    saleIsOk = false;
+                                                    System.out.println("This buyer already has a current transaction.");
+                                                    break;
+                                                } else {
+                                                    saleIsOk = true;
+                                                }
+                                            }
+                                        } else {
+                                            saleIsOk = true;
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("House ref is not valid.");
+                                    isOK = false;
+                                    continue;
                                 }
                             } else {
-                                System.out.println("House ref is not valid.");
+                                System.out.println("Buyer is not valid.");
                                 isOK = false;
                                 continue;
                             }
                         } else {
-                            System.out.println("Buyer is not valid.");
+                            System.out.println("Invalid command");
                             isOK = false;
-                            continue;
                         }
                     } else {
-                        System.out.println("Invalid command");
-                        isOK = false;
+                        System.out.println("You cannot enter null value. Please try again.");
                     }
-                } else {
-                    System.out.println("You cannot enter null value. Please try again.");
-                }
-                if (saleIsOk) {
-                    RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 12, 1));
-                    SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yy");
-                    String saleAgreement = formater.format(date);
-                    sale = new Sales(buyer, house, saleAgreement, "");
-                    System.out.println("The sale\n" + sale.toString() + "\nhas been created.");
-                    isOK = true;
+                    if (saleIsOk) {
+                        RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 12, 1));
+                        SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yy");
+                        String saleAgreement = formater.format(date);
+                        sale = new Sales(buyer, house, saleAgreement, "");
+                        System.out.println("The sale\n" + sale.toString() + "\nhas been created.");
+                        isOK = true;
+                    }
+                }else {
+                    break;
                 }
             } catch (Exception e) {
                 System.out.println(" Not valid because " + e.getMessage() + " \n Please try again.");
@@ -138,28 +141,32 @@ public class SalesCmd {
                 do {
                     System.out.println("closesale/ref");
                     String scan = sc.nextLine();
-                    String[] info = scan.split("/");
-                    f = info[0];
-                    ref = info[1];
-                    if (!f.equals("") && !ref.equals("")) {
-                        String function = f.toLowerCase();
-                        if (function.equals("closesale")) {
-                            for (int i = 0; i < housesList.size(); i++) {
-                                Houses house1 = housesList.get(i);
-                                if (house1.getRef().equals(ref)) {
-                                    houseIsOK = true;
-                                    break;
-                                } else {
-                                    houseIsOK = false;
+                    if(!scan.toLowerCase().equals("back")) {
+                        String[] info = scan.split("/");
+                        f = info[0];
+                        ref = info[1];
+                        if (!f.equals("") && !ref.equals("")) {
+                            String function = f.toLowerCase();
+                            if (function.equals("closesale")) {
+                                for (int i = 0; i < housesList.size(); i++) {
+                                    Houses house1 = housesList.get(i);
+                                    if (house1.getRef().equals(ref)) {
+                                        houseIsOK = true;
+                                        break;
+                                    } else {
+                                        houseIsOK = false;
+                                    }
                                 }
+                                functionIsOk = true;
+                            } else {
+                                System.out.println("Invalid command. Please try again");
+                                functionIsOk = false;
                             }
-                            functionIsOk = true;
                         } else {
-                            System.out.println("Invalid command. Please try again");
-                            functionIsOk = false;
+                            System.out.println("You cannot enter null value. Please try again.");
                         }
-                    } else {
-                        System.out.println("You cannot enter null value. Please try again.");
+                    }else {
+                        return;
                     }
                 } while (!functionIsOk);
                 if (houseIsOK) {

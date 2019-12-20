@@ -20,25 +20,28 @@ public class HousesCmd {
             try {
                 System.out.println("addhouse/title/ref/category/price");
                 String scan = sc.nextLine();
-                String [] info = scan.split("/");
-                f = info[0];
-                title = info[1];
-                ref = info[2];
-                category = info[3];
-                p = info[4];
-                if (!f.equals("") && !title.equals("") && !ref.equals("") && !category.equals("") && !p.equals("")) {
-                    String function = f.toLowerCase();
-                    if (function.equals("addhouse")) {
-                        price = Integer.parseInt(p);
-                        house = new Houses(title, ref, category, price);
-                        isOK = true;
+                if(!scan.toLowerCase().equals("back")) {
+                    String[] info = scan.split("/");
+                    f = info[0];
+                    title = info[1];
+                    ref = info[2];
+                    category = info[3];
+                    p = info[4];
+                    if (!f.equals("") && !title.equals("") && !ref.equals("") && !category.equals("") && !p.equals("")) {
+                        String function = f.toLowerCase();
+                        if (function.equals("addhouse")) {
+                            price = Integer.parseInt(p);
+                            house = new Houses(title, ref, category, price);
+                            isOK = true;
+                        } else {
+                            System.out.println("Invalid command. Please try again");
+                            isOK = false;
+                        }
                     } else {
-                        System.out.println("Invalid command. Please try again");
-                        isOK = false;
+                        System.out.println("You cannot enter null value. Please try again.");
                     }
-                }
-                else {
-                    System.out.println("You cannot enter null value. Please try again.");
+                }else {
+                    break;
                 }
             } catch (Exception e) {
                 System.out.println(" Not valid because " + e.getMessage() + " \n Please try again.");
@@ -84,28 +87,32 @@ public class HousesCmd {
                 do {
                     System.out.println("edithouse/ref");
                     String scan = sc.nextLine();
-                    String[] info = scan.split("/");
-                    f = info[0];
-                    ref = info[1];
-                    if (!f.equals("") && !ref.equals("")) {
-                        String function = f.toLowerCase();
-                        if (function.equals("edithouse")) {
-                            for (int i = 0; i < housesList.size(); i++) {
-                                Houses house1 = housesList.get(i);
-                                if (house1.getRef().equals(ref)) {
-                                    houseIsOK = true;
-                                    break;
-                                } else {
-                                    houseIsOK = false;
+                    if(!scan.toLowerCase().equals("back")) {
+                        String[] info = scan.split("/");
+                        f = info[0];
+                        ref = info[1];
+                        if (!f.equals("") && !ref.equals("")) {
+                            String function = f.toLowerCase();
+                            if (function.equals("edithouse")) {
+                                for (int i = 0; i < housesList.size(); i++) {
+                                    Houses house1 = housesList.get(i);
+                                    if (house1.getRef().equals(ref)) {
+                                        houseIsOK = true;
+                                        break;
+                                    } else {
+                                        houseIsOK = false;
+                                    }
                                 }
+                                functionIsOk = true;
+                            } else {
+                                System.out.println("Invalid command. Please try again");
+                                functionIsOk = false;
                             }
-                            functionIsOk = true;
                         } else {
-                            System.out.println("Invalid command. Please try again");
-                            functionIsOk = false;
+                            System.out.println("You cannot enter null value. Please try again.");
                         }
-                    } else {
-                        System.out.println("You cannot enter null value. Please try again.");
+                    }else {
+                        return;
                     }
                 } while (!functionIsOk);
 
@@ -197,31 +204,35 @@ public class HousesCmd {
                 do {
                     System.out.println("removehouse/ref");
                     String scan = sc.nextLine();
-                    String[] info = scan.split("/");
-                    f = info[0];
-                    ref = info[1];
-                    if (!f.equals("") && !ref.equals("")) {
-                        String function = f.toLowerCase();
-                        if (function.equals("removehouse")) {
-                            for (int i = 0; i < housesList.size(); i++) {
-                               house = housesList.get(i);
-                                if (house.getRef().equals(ref)) {
-                                    houseIsOK = true;
-                                    break;
-                                } else {
-                                    houseIsOK = false;
+                    if(!scan.toLowerCase().equals("back")) {
+                        String[] info = scan.split("/");
+                        f = info[0];
+                        ref = info[1];
+                        if (!f.equals("") && !ref.equals("")) {
+                            String function = f.toLowerCase();
+                            if (function.equals("removehouse")) {
+                                for (int i = 0; i < housesList.size(); i++) {
+                                    house = housesList.get(i);
+                                    if (house.getRef().equals(ref)) {
+                                        houseIsOK = true;
+                                        break;
+                                    } else {
+                                        houseIsOK = false;
+                                    }
                                 }
+                                if (!houseIsOK) {
+                                    System.out.println("This house doesn't exist.");
+                                }
+                                functionIsOk = true;
+                            } else {
+                                System.out.println("Invalid command. Please try again");
+                                functionIsOk = false;
                             }
-                            if(!houseIsOK){
-                                System.out.println("This house doesn't exist.");
-                            }
-                            functionIsOk = true;
                         } else {
-                            System.out.println("Invalid command. Please try again");
-                            functionIsOk = false;
+                            System.out.println("You cannot enter null value. Please try again.");
                         }
-                    } else {
-                        System.out.println("You cannot enter null value. Please try again.");
+                    }else {
+                        return;
                     }
                 } while (!functionIsOk);
                 if (houseIsOK) {
