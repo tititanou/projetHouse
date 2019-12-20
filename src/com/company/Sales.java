@@ -12,8 +12,8 @@ public class Sales {
      */
     private Users buyer;
     private Houses house;
-    private String saleAgreement;
-    private String definitiveSale;
+    private RandomDate saleAgreement;
+    private RandomDate definitiveSale;
 
     /**
      * constructor method of sales objects
@@ -22,7 +22,7 @@ public class Sales {
      * @param saleAgreement
      * @param definitiveSale
      */
-    public Sales(Users buyer, Houses house, String saleAgreement, String definitiveSale) {
+    public Sales(Users buyer, Houses house, RandomDate saleAgreement, RandomDate definitiveSale) {
         this.buyer = buyer;
         this.house = house;
         this.saleAgreement = saleAgreement;
@@ -45,11 +45,11 @@ public class Sales {
         return this.house;
     }
 
-    public String getSaleAgreement(){
+    public RandomDate getSaleAgreement(){
         return this.saleAgreement;
     }
 
-    public String getDefinitiveSale(){
+    public RandomDate getDefinitiveSale(){
         return this.definitiveSale;
     }
 
@@ -57,7 +57,7 @@ public class Sales {
      * method to change the definitive sale
      * @param definitiveSale
      */
-    public void setDefinitiveSale(String definitiveSale){
+    public void setDefinitiveSale(RandomDate definitiveSale){
         this.definitiveSale = definitiveSale;
     }
 

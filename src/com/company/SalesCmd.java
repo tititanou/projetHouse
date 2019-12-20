@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SalesCmd {
@@ -95,10 +96,15 @@ public class SalesCmd {
                         System.out.println("You cannot enter null value. Please try again.");
                     }
                     if (saleIsOk) {
-                        RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 1, 1));
+                        /*RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 1, 1));
                         SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yy");
-                        String saleAgreement = formater.format(date);
-                        sale = new Sales(buyer, house, saleAgreement, "");
+                        String saleAgreement = formater.format(date);*/
+                        Random rand = new Random();
+                        int day = rand.nextInt(29 - 1 + 1) + 1;
+                        int month = rand.nextInt(12 - 1 + 1) + 1;
+                        int year = rand.nextInt(2019 - 2017 + 1) + 2017;
+                        RandomDate saleAgreement = new RandomDate(day , month , year);
+                        sale = new Sales(buyer, house, saleAgreement, null);
                         System.out.println("The sale\n" + sale.toString() + "\nhas been created.");
                         isOK = true;
                     }
@@ -180,13 +186,21 @@ public class SalesCmd {
                     closeIsOK = false;
                 }
                 if (sale != null) {
-                    if(sale.getDefinitiveSale().equals("")) {
-                        String date1 = sale.getSaleAgreement();
-                        String[] infos = date1.split("-");
-                        RandomDate date2 = new RandomDate(LocalDate.of(Integer.parseInt(infos[0]), Integer.parseInt(infos[1]), Integer.parseInt(infos[2])), LocalDate.of(2019, 12, 1));
-                        SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yy");
-                        String definitiveDate = formater.format(date2);
-                        sale.setDefinitiveSale(definitiveDate);
+                    if(sale.getDefinitiveSale() == null) {
+                        boolean dateOK = false;
+                        do {
+                            try {
+                                Random rand = new Random();
+                                int day = rand.nextInt(29 - sale.getSaleAgreement().getDay() + 1) + sale.getSaleAgreement().getDay();
+                                int month = rand.nextInt(12 - sale.getSaleAgreement().getMonth() + 1) + sale.getSaleAgreement().getMonth();
+                                int year = rand.nextInt(2019 - sale.getSaleAgreement().getYear() + 1) + sale.getSaleAgreement().getYear();
+                                RandomDate definitiveDate = new RandomDate(day, month, year);
+                                sale.setDefinitiveSale(definitiveDate);
+                                dateOK = true;
+                            } catch (Exception e) {
+                                dateOK = false;
+                            }
+                        }while (!dateOK);
                         System.out.println("The sale\n" + sale.toString() + "\nhas been closed.");
                         closeIsOK = true;
                     }

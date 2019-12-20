@@ -1,20 +1,44 @@
 package com.company;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Random;
+/*import java.time.LocalDate;
+import java.util.Date;*/
 
-public class RandomDate extends Date {
+public class RandomDate /*extends Date*/ {
 
-    private final LocalDate minDate;
+    private final int day;
+    private final int month;
+    private final int year;
+    /*private final LocalDate minDate;
     private final LocalDate maxDate;
-    private final Random random;
+    private final Random random; */
 
-    public RandomDate(LocalDate minDate, LocalDate maxDate) {
+    public RandomDate(int day , int month , int year){
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String toString(){
+        return (this.day + "-" + this.month + "-" + this.year);
+    }
+
+    /*public RandomDate(LocalDate minDate, LocalDate maxDate) {
         this.minDate = minDate;
         this.maxDate = maxDate;
         this.random = new Random();
-    }
+
 
     public LocalDate nextDate() {
         int minDay = (int) minDate.toEpochDay();
@@ -30,5 +54,7 @@ public class RandomDate extends Date {
                 ", minDate=" + minDate +
                 '}';
     }
+
+     */
 }
 

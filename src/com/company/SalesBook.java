@@ -28,7 +28,7 @@ public class SalesBook {
      * @param saleAgreement
      * @param definitiveSale
      */
-    void addSales(Users buyer, Houses house, String saleAgreement, String definitiveSale) {
+    void addSales(Users buyer, Houses house, RandomDate saleAgreement, RandomDate definitiveSale) {
         Sales sale = new Sales(buyer , house , saleAgreement , definitiveSale);
         String ref = house.getRef();
         salesMap.put(ref, sale);
