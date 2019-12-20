@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class HousesCmd {
-
+    /**
+     * method to create a new house object scan the system to take the input entry then split the line caught,verify
+     * all the infos of the input and if all is ok
+     * @return a new houses object
+     */
     public static Houses create(){
         String f;
         String title;
@@ -50,6 +54,11 @@ public class HousesCmd {
         return house;
     }
 
+    /**
+     * create a Houses object with the previous method verify if is not already existing in the                                                                                                                                                                                                                          b
+     * @param housesList
+     * if the house is not in the list, the created object is valid and added to the list
+     */
     public static void add(List<Houses> housesList) {
         Houses house = create();
         if(house != null) {
@@ -67,6 +76,12 @@ public class HousesCmd {
         }
     }
 
+    /**
+     * method to edit a house, verifies if the house we want to change exists(with the houseslist), verifies the house
+     * is on sale(with the saleslist), if not verifies if the new house is not already existing
+     * @param housesList
+     * @param salesList
+     */
     public static void edit(List<Houses> housesList , List<Sales> salesList) {
         String f;
         String title;
@@ -190,6 +205,12 @@ public class HousesCmd {
         }while (!editIsOK);
     }
 
+    /**
+     * method to remove a house, verifies if the method call is ok then verifies if the house we want to remove exists,
+     * verifies if the house is not on sale
+     * @param housesList
+     * @param salesList
+     */
     public static void remove(List<Houses> housesList , List<Sales> salesList) {
         String f;
         String ref;
@@ -273,6 +294,10 @@ public class HousesCmd {
         }while (!removeIsOk);
     }
 
+    /**
+     * display the houseslist
+     * @param housesList
+     */
     public static void list(List<Houses> housesList){
         for(int i = 0; i < housesList.size() ; i++) {
             System.out.println(housesList.get(i).toString());

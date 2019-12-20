@@ -4,9 +4,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class HousesLogger {
+public class HousesLogger implements ILogger{
 
-    void logToFile(String message) {
+    /**
+     *method to create a new file and write on it
+     * @param message
+     */
+    public void logToFile(String message) {
         try {
             File f = new File("housesbook.txt");
             FileWriter fileWriter = new FileWriter(f, true);
@@ -17,7 +21,11 @@ public class HousesLogger {
         }
     }
 
-    void loggingFile(String message){
+    /**
+     *method to create a new file and write on it
+     * @param message
+     */
+    public void loggingFile(String message){
         try {
             File f = new File("housesbook.log");
             FileWriter fileWriter = new FileWriter(f, true);

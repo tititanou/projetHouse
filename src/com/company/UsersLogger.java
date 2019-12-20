@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class UsersLogger {
+public class UsersLogger implements ILogger{
 
-    void logToFile(String message) {
+    public void logToFile(String message) {
         try {
             File f = new File("usersbook.txt");
             FileWriter fileWriter = new FileWriter(f, true);
@@ -17,7 +17,7 @@ public class UsersLogger {
         }
     }
 
-    void loggingFile(String message){
+    public void loggingFile(String message){
         try {
             File f = new File("usersbook.log");
             FileWriter fileWriter = new FileWriter(f, true);

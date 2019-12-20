@@ -3,8 +3,13 @@ package com.company;
 import java.util.List;
 
 public class FilesCmd {
-
-public static void save(List<Users> usersList , List<Houses> housesList , List<Sales> salesList){
+    /**
+     * to save all the datas from the lists to a file
+     * @param usersList the list of the buyers with Users objects
+     * @param housesList the list of the houses with Houses objects
+     * @param salesList the list of all the sales with Sales objects
+     */
+    public static void save(List<Users> usersList , List<Houses> housesList , List<Sales> salesList){
 
     UsersBook usersBook = new UsersBook();
     HousesBook housesBook = new HousesBook();

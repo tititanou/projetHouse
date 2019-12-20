@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class RandomDate extends Date {
+
     private final LocalDate minDate;
     private final LocalDate maxDate;
     private final Random random;

@@ -8,6 +8,9 @@ public class Utilities {
     /*[#15] restore
 - cette commande va détecter la présence des fichiers sauvegardés précédemment (si ils existent) et va les ouvrir en lecture et récupérer les informations contenues dedans pour créer de nouveaux objets en mémoire (et donc restaurer l'état mémoire comme au moment de la sauvegarde).*/
 
+    /**
+     * method to display the menu
+     */
     public static void displayMenu(){
         System.out.println("====================");
         System.out.println("01 - Help");
@@ -28,6 +31,11 @@ public class Utilities {
         System.out.println("====================");
     }
 
+    /**
+     * method to take the user input choice
+     * @return an int corresponding to the user choice
+     * if invalid input return -1
+     */
     public static int getInputChoice() {
         System.out.println("Input your choice");
         Scanner sc = new Scanner(System.in);
@@ -83,6 +91,14 @@ public class Utilities {
         }
     }
 
+    /**
+     * with the int returned by the previous method , this method process the corresponding method
+     * @param cmdNum the input choice
+     * @param usersList
+     * @param housesList
+     * @param salesList
+     * the requisite lists for the different called methods
+     */
     public static void processCommand(int cmdNum, List<Users> usersList , List<Houses> housesList , List<Sales> salesList){
         if( cmdNum == 1 ){
             displayMenu();

@@ -95,7 +95,7 @@ public class SalesCmd {
                         System.out.println("You cannot enter null value. Please try again.");
                     }
                     if (saleIsOk) {
-                        RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 12, 1));
+                        RandomDate date = new RandomDate(LocalDate.of(2010, 1, 1), LocalDate.of(2019, 1, 1));
                         SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yy");
                         String saleAgreement = formater.format(date);
                         sale = new Sales(buyer, house, saleAgreement, "");
