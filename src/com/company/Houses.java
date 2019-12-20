@@ -36,6 +36,14 @@ public class Houses {
         return this.title;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
     public String getRef() {
         return this.ref;
     }

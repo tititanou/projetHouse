@@ -38,6 +38,26 @@ public class Users {
         this.rate = rate;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public int getLoan() {
+        return loan;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
     public String getPatronym(){
         return this.patronym;
     }

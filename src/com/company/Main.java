@@ -28,13 +28,16 @@ public class Main {
         UsersCmd.list(usersList);
         HousesCmd.list(housesList);
 
+
+
         SalesCmd.add(usersList , housesList , salesList);
-        SalesCmd.list(salesList);
+        FilesCmd.save(usersList , housesList , salesList);
+        /*SalesCmd.list(salesList);
         HousesCmd.list(housesList);
         HousesCmd.edit(housesList , salesList);
         HousesCmd.remove(housesList , salesList);
         SalesCmd.close(housesList , salesList);
-        SalesCmd.list(salesList);
+        SalesCmd.list(salesList);*/
 
     }
 }
