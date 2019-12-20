@@ -1,14 +1,43 @@
 package com.company;
 
+import java.util.Date;
+
 public class Sales {
 
-    /*
-    [>] Les transactions
-- nom de l'acquéreur (chaine de caractères)
-- le prénom de l'acquéreur (chaine de caractères)
-- la référence de la maison (chaine de caractères)
-- la date de signature du compromis (vous êtes libres du format exact à implémenter)
-- la date de signature définitive (vous êtes libres du format exact à implémenter. N'oubliez pas de spécifier la valeur à utiliser pour une vente qui n'a pas encore été signée définitivement)
-     */
+    private Users buyer;
+    private Houses house;
+    private String saleAgreement;
+    private String definitiveSale;
 
+    public Sales(Users buyer, Houses house, String saleAgreement, String definitiveSale) {
+        this.buyer = buyer;
+        this.house = house;
+        this.saleAgreement = saleAgreement;
+        this.definitiveSale = definitiveSale;
+    }
+
+    public Users getBuyer() {
+        return this.buyer;
+    }
+
+    public Houses getHouse() {
+        return this.house;
+    }
+
+    public String getSaleAgreement(){
+        return this.saleAgreement;
+    }
+
+    public String getDefinitiveSale(){
+        return this.definitiveSale;
+    }
+
+    public void setDefinitiveSale(String definitiveSale){
+        this.definitiveSale = definitiveSale;
+    }
+
+    public String toString() {
+        return ("=====================\nBuyer= " + this.buyer.getPatronym() + "\nHouse= " + this.house.getTitle() + " ref= " + this.house.getRef() +
+                "\nSale agreement firm= " + this.saleAgreement + "\nSale definitive firm= " + this.definitiveSale + "\n=====================");
+    }
 }

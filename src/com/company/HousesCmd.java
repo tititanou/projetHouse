@@ -64,8 +64,7 @@ public class HousesCmd {
         }
     }
 
-    /* - pour chaque champ de valeur, on peut laisser une chaine vide pour indiquer qu'on ne change pas la valeur (comme expliqué dans la commande edituser).*/
-    public static void edit(List<Houses> housesList) {
+    public static void edit(List<Houses> housesList , List<Sales> salesList) {
         String f;
         String title;
         String ref;
@@ -77,6 +76,7 @@ public class HousesCmd {
         boolean houseIsOK = false;
         boolean functionIsOk = false;
         boolean editIsOK =false;
+        boolean canEdit = false;
         Houses existingHouse = null;
         Houses house = null;
         do {
@@ -110,6 +110,23 @@ public class HousesCmd {
                 } while (!functionIsOk);
 
                 if (houseIsOK) {
+                    if(salesList.size() > 0){
+                        for(int j = 0 ; j < salesList.size() ; j++){
+                            if(salesList.get(j).getHouse().getRef().equals(ref)){
+                                canEdit = false;
+                                break;
+                            } else {
+                                canEdit = true;
+                            }
+                        }
+                    }else {
+                        canEdit = true;
+                    }
+                }else {
+                    System.out.println("This house doesn't exist!");
+                    editIsOK = false;
+                }
+                if (canEdit) {
                     System.out.println("Enter a new title");
                     title = scann.nextLine();
                     System.out.println("Enter a new ref: ");
@@ -143,8 +160,7 @@ public class HousesCmd {
                             house.setPrice(price);
                             editIsOK = true;
                             break;
-                        }
-                        else {
+                        } else {
                             if (!title.equals("")) {
                                 house.setTitle(title);
                             }
@@ -159,8 +175,7 @@ public class HousesCmd {
                         }
                     }
                 }else {
-                    System.out.println("This house doesn't exist!");
-                    editIsOK = false;
+                    System.out.println("This house is already for sale.");
                 }
             } catch (Exception e) {
                 System.out.println(" Not valid because " + e.getMessage() + " \n Please try again.");
@@ -168,11 +183,7 @@ public class HousesCmd {
         }while (!editIsOK);
     }
 
-    public static void remove(List<Houses> housesList) {
-    /*[#9] removehouse <ref>
-    - cette commande recherche une référence de maison et la supprime de la liste en mémoire.
-    - si la référence n'est pas trouvée, un message d'erreur s'affiche.
-    - si la référence existe, il faut vérifier que cette maison n'est pas utilisée dans une transaction. Si ce n'est pas le cas, un message d'erreur affichera que cette maison ne peut pas être supprimée car actuellement utilisée.*/
+    public static void remove(List<Houses> housesList , List<Sales> salesList) {
         String f;
         String ref;
         Houses house = null;
@@ -180,6 +191,7 @@ public class HousesCmd {
         boolean houseIsOK = false;
         boolean functionIsOk = false;
         boolean removeIsOk = false;
+        boolean canRemove = false;
         do {
             try {
                 do {
@@ -213,16 +225,31 @@ public class HousesCmd {
                     }
                 } while (!functionIsOk);
                 if (houseIsOK) {
+                    if (salesList.size() > 0) {
+                        for (int j = 0; j < salesList.size(); j++) {
+                            if (salesList.get(j).getHouse().getRef().equals(ref)) {
+                                canRemove = false;
+                                System.out.println("This house is already for sale.");
+                                break;
+                            } else {
+                                canRemove = true;
+                            }
+                        }
+                    } else {
+                        canRemove = true;
+                    }
+                }
+                if(canRemove){
                     System.out.println("Do you want to remove \n" + house.toString() + "?\n Yes/No");
                     Scanner scann = new Scanner(System.in);
                     String input = scann.next();
                     String answer = input.toLowerCase();
                     if (answer.equals("yes")) {
                         housesList.remove(house);
-                        System.out.println(house.toString() + "\nhas been deleted.");
+                        System.out.println(house.toString() + "\nhas been removed.");
                         removeIsOk = true;
                     } else if (answer.equals("no")) {
-                        System.out.println(house.toString() + "\nhasn't been deleted.");
+                        System.out.println(house.toString() + "\nhasn't been removed.");
                         removeIsOk = true;
                     } else {
                         System.out.println("Answer incorrect.\nRemove failed.\nPlease try again.");

@@ -2,15 +2,6 @@ package com.company;
 
 public class Users {
 
-    /*
-    [>] Les acquéreurs
-- le prénom (chaine de caractères)
-- le nom (chaine de caractères)
-- la banque (chaine de caractères)
-- l'emprunt en euros (entier)
-- le taux d'emprunt en pourcentage (nombre entier entre 0 et 100)
-     */
-
     private String firstName;
     private String lastName;
     private String patronym;
@@ -47,6 +38,10 @@ public class Users {
         this.rate = rate;
     }
 
+    public String getPatronym(){
+        return this.patronym;
+    }
+
     @Override
     public boolean equals(Object object) {
         return object.equals(this.patronym);
@@ -55,6 +50,6 @@ public class Users {
     @Override
     public String toString() {
         return ("======================\nFirst name= " + this.firstName + "\nLast name= " + this.lastName +
-                "\nBank= " + this.bank + "\nLoan= " + this.loan + "\nRate= " + this.rate + "=========================");
+                "\nBank= " + this.bank + "\nLoan= " + this.loan + "\nRate= " + this.rate + "\n=========================");
     }
 }

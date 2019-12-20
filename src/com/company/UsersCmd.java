@@ -71,8 +71,7 @@ public class UsersCmd {
         }
     }
 
-    public static void edit(List<Users> usersList) {
-        /* - si l'utilisateur est utilisé dans une transaction , alors la modification de cet utilisateur ne pourra pas se faire et un message d'erreur sera affiché */
+    public static void edit(List<Users> usersList , List<Sales> salesList) {
         String f;
         String fn;
         String ln;
@@ -89,41 +88,56 @@ public class UsersCmd {
         boolean buyerIsOK = false;
         boolean functionIsOk = false;
         boolean editIsOK =false;
+        boolean isBuying = true;
         Users existingBuyer = null;
         Users buyer = null;
-            do {
-                try {
-                    do {
-                        System.out.println("edituser/firstname/lastname");
-                        String scan = sc.nextLine();
-                        String[] info = scan.split("/");
-                        f = info[0];
-                        fn = info[1];
-                        ln = info[2];
-                        if (!f.equals("") && !fn.equals("") && !ln.equals("")) {
-                            String function = f.toLowerCase();
-                            if (function.equals("edituser")) {
-                                patro = fn + " " + ln;
-                                for (int i = 0; i < usersList.size(); i++) {
-                                    Users buyer1 = usersList.get(i);
-                                    if (buyer1.equals(patro)) {
-                                        buyerIsOK = true;
-                                        break;
-                                    } else {
-                                        buyerIsOK = false;
-                                    }
-                                }
-                                functionIsOk = true;
-                            } else {
-                                System.out.println("Invalid command. Please try again");
-                                functionIsOk = false;
-                            }
-                        } else {
-                            System.out.println("You cannot enter null value. Please try again.");
-                        }
-                    } while (!functionIsOk);
+        Users buyer1 = null;
 
-                    if (buyerIsOK) {
+        do {
+            try {
+                do {
+                    System.out.println("edituser/firstname/lastname");
+                    String scan = sc.nextLine();
+                    String[] info = scan.split("/");
+                    f = info[0];
+                    fn = info[1];
+                    ln = info[2];
+                    if (!f.equals("") && !fn.equals("") && !ln.equals("")) {
+                        String function = f.toLowerCase();
+                        if (function.equals("edituser")) {
+                            patro = fn + " " + ln;
+                            for (int i = 0; i < usersList.size(); i++) {
+                                buyer1 = usersList.get(i);
+                                if (buyer1.equals(patro)) {
+                                    buyerIsOK = true;
+                                    break;
+                                } else {
+                                    buyerIsOK = false;
+                                }
+                            }
+                            functionIsOk = true;
+                        } else {
+                            System.out.println("Invalid command. Please try again");
+                            functionIsOk = false;
+                        }
+                    } else {
+                        System.out.println("You cannot enter null value. Please try again.");
+                    }
+                } while (!functionIsOk);
+                if (buyerIsOK) {
+                    if(salesList.size() > 0) {
+                        for (int j = 0; j < salesList.size(); j++) {
+                            if (buyer1.equals(salesList.get(j).getBuyer())) {
+                                isBuying = true;
+                                break;
+                            } else {
+                                isBuying = false;
+                            }
+                        }
+                    }else {
+                        isBuying = false;
+                    }
+                    if (!isBuying) {
                         System.out.println("Enter a new firstname:");
                         firstname = scann.nextLine();
                         System.out.println("Enter a new lastname: ");
@@ -134,7 +148,6 @@ public class UsersCmd {
                         l = scann.nextLine();
                         System.out.println("Enter a new rate(0 <= rate <= 100): ");
                         r = scann.nextLine();
-
                         String patronym;
                         if (!firstname.equals("") && !lastname.equals("")) {
                             patronym = firstname + " " + lastname;
@@ -142,7 +155,7 @@ public class UsersCmd {
                             patronym = firstname + " " + ln;
                         } else if (firstname.equals("") && !lastname.equals("")) {
                             patronym = fn + " " + lastname;
-                        } else{
+                        } else {
                             patronym = "";
                         }
                         for (int i = 0; i < usersList.size(); i++) {
@@ -175,7 +188,6 @@ public class UsersCmd {
                                             }
                                             if (!lastname.equals("")) {
                                                 buyer.setLastName(lastname);
-
                                             }
                                             if (!b.equals("")) {
                                                 buyer.setBank(b);
@@ -232,18 +244,20 @@ public class UsersCmd {
                                 }
                             }
                         }
-
                     } else {
-                        System.out.println("This user doesn't exist!");
-                        editIsOK = false;
+                        System.out.println("This buyer already has a current transaction.");
                     }
-                } catch (Exception e) {
-                    System.out.println(" Not valid because " + e.getMessage() + " \n Please try again.");
+                } else {
+                    System.out.println("This user doesn't exist!");
+                    editIsOK = false;
                 }
-            }while (!editIsOK);
+            } catch (Exception e) {
+                System.out.println(" Not valid because " + e.getMessage() + " \n Please try again.");
+            }
+        }while (!editIsOK);
     }
 
-    public static void remove(List<Users> usersList) {
+    public static void remove(List<Users> usersList , List<Sales> salesList) {
 /* - si l'utilisateur est utilisé dans une transaction , alors l'effacement de cet utilisateur ne pourra pas se faire et un message d'erreur sera affiché */
         String f;
         String fn;
@@ -253,6 +267,7 @@ public class UsersCmd {
         Scanner sc = new Scanner(System.in);
         boolean buyerIsOK = false;
         boolean functionIsOk = false;
+        boolean canRemove =false;
         boolean removeIsOk = false;
         do {
             try {
@@ -289,6 +304,20 @@ public class UsersCmd {
                     }
                 } while (!functionIsOk);
                 if (buyerIsOK) {
+                    if(salesList.size() > 0) {
+                        for (int j = 0; j < salesList.size(); j++){
+                            if (buyer.equals(salesList.get(j).getBuyer())) {
+                                canRemove = false;
+                                break;
+                            } else {
+                                canRemove = true;
+                            }
+                        }
+                    }else {
+                    canRemove = true;
+                    }
+                }
+                if(canRemove){
                     System.out.println("Do you want to remove \n" + buyer.toString() + "?\n Yes/No");
                     Scanner scann = new Scanner(System.in);
                     String input = scann.next();
@@ -304,6 +333,8 @@ public class UsersCmd {
                         System.out.println("Answer incorrect.\nRemove failed.\nPlease try again.");
                         removeIsOk = false;
                     }
+                }else {
+                    System.out.println("This buyer already has a current transaction.");
                 }
             } catch (Exception e) {
                 System.out.println(" Not valid because " + e.getMessage() + " \n Please try again.");

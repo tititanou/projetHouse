@@ -2,14 +2,6 @@ package com.company;
 
 public class Houses {
 
-    /*
-    [>] Les maisons
-- l'intitulé (chaine de caractères)
-- la référence (chaine de caractères arbitraire et unique, ex: B312)
-- la catégorie (chaine de caractères)
-- le prix (entier)
-     */
-
     private String title;
     private String ref;
     private String category;
@@ -40,8 +32,12 @@ public class Houses {
         this.price = price;
     }
 
+    public String getTitle(){
+        return this.title;
+    }
+
     public String getRef() {
-        return ref;
+        return this.ref;
     }
 
     @Override
