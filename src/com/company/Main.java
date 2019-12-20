@@ -18,8 +18,8 @@ public class Main {
         List<Houses> housesList = new ArrayList();
         List<Sales> salesList = new ArrayList();
 
+        Utilities.displayMenu();
         do {
-            Utilities.displayMenu();
             myChoice = Utilities.getInputChoice();
             if (myChoice != 2) {
                 Utilities.processCommand(myChoice , usersList , housesList , salesList);
